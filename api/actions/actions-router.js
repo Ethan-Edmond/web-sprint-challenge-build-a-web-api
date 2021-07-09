@@ -39,6 +39,10 @@ router.get('/:id', validateActionId, (req, res, next) => {
 });
 
 router.post('/', validateAction, (req, res, next) => {
+  const { project_id, description, notes, completed } = req.body;
+  Actions.insert({ project_id, description, notes, completed})
+    .then(console.log)
+    .catch(console.log)
   res.status(200).json({
     message: 'post on /api/actions'
   });

@@ -42,7 +42,13 @@ function validateAction(req, res, next) {
       (typeof notes === 'string') &&
       (typeof completed === 'boolean')
     ){ // type check
-      next();
+      if (description.length <= 128) { // size check
+	next();
+      } else {
+        res.status(400).json({
+	  message: 'Description is size limited to 128 characters'
+	});
+      }
     } else {
       res.status(400).json({
         message: 'One of the sections of body has the wrong type'
