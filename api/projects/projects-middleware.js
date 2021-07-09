@@ -1,5 +1,8 @@
 // add middlewares here related to projects
+const Projects = require('./projects-model');
 
+console.log(Projects);
+// get insert update remove getProjectActions
 function projectLogger(req, res, next) {
   console.log("----- Project Logger -----");
   console.log('Req Method: ', req.method);

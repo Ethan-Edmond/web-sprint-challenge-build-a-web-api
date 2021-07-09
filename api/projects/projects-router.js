@@ -3,6 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 
+const Projects = require('./projects-model');
 const {
   projectLogger,
   validateProjectId,
@@ -12,9 +13,15 @@ const {
 router.use(projectLogger);
 
 router.get('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'get on /api/projects/'
-  });
+  Projects.get()
+    .then(projects => {
+      res.status(200).json(projects);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    });
 });
 
 router.get('/:id', validateProjectId, (req, res, next) => {
