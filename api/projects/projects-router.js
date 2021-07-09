@@ -50,9 +50,12 @@ router.post('/', validateProject, (req, res, next) => {
 });
 
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
-  res.status(200).json({
-	  message: 'put on /api/projects/:id'
-  });
+  const { name, description, completed } = req.body;
+  Projects.update(req.params.id, { name, description, completed })
+    .then(console.log)
+    .catch(console.log)
+
+  res.json({message: 'put'});
 });
 
 router.delete('/:id', validateProjectId, (req, res, next) => {

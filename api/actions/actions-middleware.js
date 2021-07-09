@@ -34,9 +34,6 @@ function validateAction(req, res, next) {
   const { project_id, description, notes } = req.body;
   const completed = req.body.completed || false;
   req.body.completed = completed;
-  console.log('Validate Action');
-  console.log(project_id, description, notes, completed);
-
   if (project_id.toString() && description && notes) { // existence check
     if (
       (typeof project_id === 'number') &&

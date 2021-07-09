@@ -53,7 +53,7 @@ router.post('/', validateAction, (req, res, next) => {
 
 router.put('/:id', validateActionId, validateAction, (req, res, next) => {
   const { project_id, description, notes, completed } = req.body;
-  Actions.update({ project_id, description, notes, completed})
+  Actions.update(req.params.id, { project_id, description, notes, completed})
     .then(action => {
       res.status(200).json(action);
     })
