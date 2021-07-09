@@ -1,5 +1,8 @@
 // add middlewares here related to actions
+const Actions = require('./actions-model');
 
+console.log(Actions);
+// get, insert, update, remove
 function actionLogger(req, res, next) {
   console.log('----- Action Logger -----');
   console.log('Req Method: ', req.method);
@@ -10,8 +13,21 @@ function actionLogger(req, res, next) {
 }
 
 function validateActionId(req, res, next) {
-  console.log('Validate Action ID');
-  next();
+  Actions.get(req.params.id)
+    .then(action => {
+      if(action) {
+        next();
+      } else {
+	res.status(404).json({
+	  message: 'Action with specified id does not exist'
+	});
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    });
 }
 
 function validateAction(req, res, next) {
