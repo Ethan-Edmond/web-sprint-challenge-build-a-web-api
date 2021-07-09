@@ -3,6 +3,9 @@ const express = require('express');
 
 const router = express.Router();
 
+const Actions = require('./actions-model');
+
+// get insert update remove
 const {
   actionLogger,
   validateActionId,
@@ -12,9 +15,15 @@ const {
 router.use(actionLogger);
 
 router.get('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'get on /api/actions'
-  });
+  Actions.get()
+    .then(actions => {
+      res.status(200).json(actions);
+    })
+    .catch(err => {
+      res.status(500).json({
+	message: err.message
+      });
+    });
 });
 
 router.get('/:id', validateActionId, (req, res, next) => {

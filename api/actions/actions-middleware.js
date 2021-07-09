@@ -1,7 +1,6 @@
 // add middlewares here related to actions
 const Actions = require('./actions-model');
 
-console.log(Actions);
 // get, insert, update, remove
 function actionLogger(req, res, next) {
   console.log('----- Action Logger -----');
