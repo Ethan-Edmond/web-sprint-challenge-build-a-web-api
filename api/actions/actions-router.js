@@ -41,19 +41,27 @@ router.get('/:id', validateActionId, (req, res, next) => {
 router.post('/', validateAction, (req, res, next) => {
   const { project_id, description, notes, completed } = req.body;
   Actions.insert({ project_id, description, notes, completed})
-    .then(console.log)
-    .catch(console.log)
-  res.status(200).json({
-    message: 'post on /api/actions'
-  });
-
+    .then(action => {
+      res.status(201).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({
+	message: err.message
+      });
+    })
 });
 
 router.put('/:id', validateActionId, validateAction, (req, res, next) => {
-  res.status(200).json({
-	  message: 'put on /api/actions/:id'
-  });
-
+  const { project_id, description, notes, completed } = req.body;
+  Actions.update({ project_id, description, notes, completed})
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({
+	message: err.message
+      });
+    });
 });
 
 router.delete('/:id', validateActionId, (req, res, next) => {

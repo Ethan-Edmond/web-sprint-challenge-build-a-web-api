@@ -32,6 +32,7 @@ function validateActionId(req, res, next) {
 function validateAction(req, res, next) {
   const { project_id, description, notes } = req.body;
   const completed = req.body.completed || false;
+  req.body.completed = completed;
   console.log('Validate Action');
   console.log(project_id, description, notes, completed);
 
