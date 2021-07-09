@@ -25,9 +25,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', validateProjectId, (req, res, next) => {
-  res.status(200).json({
-	  message: 'get on /api/projects/:id'
-  });
+  Projects.get(req.params.id)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    })
 });
 
 router.post('/', validateProject, (req, res, next) => {
