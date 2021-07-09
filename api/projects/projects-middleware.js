@@ -3,7 +3,7 @@
 function projectLogger(req, res, next) {
   console.log("----- Project Logger -----");
   console.log('Req Method: ', req.method);
-  console.log('Req URL: ', req.protocol + '://' + req.get('host'));
+  console.log('Req URL: ', req.protocol + '://' + req.get('host') + req.originalUrl);
   console.log("TimeStamp: ", Date());
   console.log('-------------------------');
   next();

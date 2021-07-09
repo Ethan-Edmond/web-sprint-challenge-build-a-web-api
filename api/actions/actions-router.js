@@ -27,10 +27,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', validateActionId, (req, res, next) => {
-  res.status(200).json({
-	  message: 'get on /api/actions/:id'
-  });
-
+  Actions.get(req.params.id)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(err => {
+      res.status(500).json({
+	message: err.message
+      });
+    });
 });
 
 router.post('/', validateAction, (req, res, next) => {
