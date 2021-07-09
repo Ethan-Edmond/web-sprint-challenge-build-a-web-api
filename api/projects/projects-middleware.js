@@ -29,22 +29,12 @@ function validateProjectId(req, res, next) {
     });
 }
 
-function validateProject(req, res, next) {
+function validateProjectPost(req, res, next) {
   const { name, description } = req.body;
   const completed = req.body.completed || false;
   req.body.completed = completed;
   if (name && description) { // existence check
-    if (
-      (typeof name === 'string') &&
-      (typeof description === 'string') &&
-      (typeof completed === 'boolean')
-    ) { // type check
-      next();
-    } else {
-      res.status(400).json({
-        message: 'One of the sections of body has the wrong type'
-      });
-    }
+    next();
   } else {
     res.status(400).json({
       message: 'Please provide name and description'
@@ -52,8 +42,35 @@ function validateProject(req, res, next) {
   }
 }
 
+function validateProjectPut(req, res, next) {
+  const { name, description, completed } = req.body;
+    if (name && description && (completed !== undefined)) { // existence check
+    next();
+  } else {
+    res.status(400).json({
+      message: 'Please provide name and description'
+    });
+  }
+}
+
+// function validateProjectTypes(req, res, next) {
+//   if (
+//     (typeof name === 'string') &&
+//     (typeof description === 'string') &&
+//     (typeof completed === 'boolean')
+//   ) {
+//     next();
+//   } else {
+//     res.status(400).json({
+//       message: 'One of the sections of body has the wrong type'
+//     });
+//   }
+// }
+
 module.exports = {
   projectLogger,
   validateProjectId,
-  validateProject
+  validateProjectPost,
+  validateProjectPut,
+//  validateProjectTypes
 };

@@ -30,42 +30,31 @@ function validateActionId(req, res, next) {
     });
 }
 
-function validateAction(req, res, next) {
+function validateActionPost(req, res, next) {
   const { project_id, description, notes } = req.body;
   const completed = req.body.completed || false;
   req.body.completed = completed;
-  if (project_id.toString() && description && notes) { // existence check
-    if (
-      (typeof project_id === 'number') &&
-      (typeof description === 'string') &&
-      (typeof notes === 'string') &&
-      (typeof completed === 'boolean')
-    ){ // type check
-      if (description.length <= 128) { // size check
-        Projects.get(project_id)
-          .then(project => {
-	    if(project) {
-	      next();
-	    } else {
-	      res.status(404).json({
-		message: 'Project with the specified id does not exist'
+  if ((project_id !== undefined) && description && notes) { // existence check
+    if (description.length <= 128) { // size check
+      Projects.get(project_id)
+        .then(project => {
+	        if(project) { // id check
+	          next();
+	        } else {
+	          res.status(404).json({
+		          message: 'Project with the specified id does not exist'
+	          });
+	        }
+	      })
+        .catch(err => {
+          res.status(500).json({
+            message: err.message
+	        });
 	      });
-	    }
-	  })
-          .catch(err => {
-            res.status(500).json({
-              message: err.message
-	    });
-	  });
-      } else {
-        res.status(400).json({
-	  message: 'Description is size limited to 128 characters'
-	});
-      }
     } else {
       res.status(400).json({
-        message: 'One of the sections of body has the wrong type'
-      });
+	      message: 'Description is size limited to 128 characters'
+	    });
     }
   } else {
     res.status(400).json({
@@ -74,8 +63,56 @@ function validateAction(req, res, next) {
   }
 }
 
+function validateActionPut(req, res, next) {
+  const { project_id, description, notes, completed } = req.body;
+  if ((project_id !== undefined) && description && notes && (completed !== undefined)) { // existence check
+    if (description.length <= 128) { // size check
+      Projects.get(project_id)
+        .then(project => {
+	        if(project) { // id check
+	          next();
+	        } else {
+	          res.status(404).json({
+		          message: 'Project with the specified id does not exist'
+	          });
+	        }
+	      })
+        .catch(err => {
+          res.status(500).json({
+            message: err.message
+	        });
+	      });
+    } else {
+      res.status(400).json({
+	      message: 'Description is size limited to 128 characters'
+	    });
+    }
+  } else {
+    res.status(400).json({
+      message: 'Please provide project id, description and notes'
+    });
+  }
+}
+
+
+// function validateActionType(req, res, next) {
+//   if (
+//     (typeof project_id === 'number') &&
+//       (typeof description === 'string') &&
+//       (typeof notes === 'string') &&
+//       (typeof completed === 'boolean')
+//   ){ // type check
+//     next();
+//   } else {
+//     res.status(400).json({
+//       message: 'One of the sections of body has the wrong type'
+//     });
+//   }
+// }
+
 module.exports = {
   actionLogger,
   validateActionId,
-  validateAction
+  validateActionPost,
+  validateActionPut
 };

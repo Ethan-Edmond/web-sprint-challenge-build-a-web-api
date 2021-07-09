@@ -9,7 +9,8 @@ const Actions = require('./actions-model');
 const {
   actionLogger,
   validateActionId,
-  validateAction
+  validateActionPost,
+  validateActionPut
 } = require('./actions-middleware');
 
 router.use(actionLogger);
@@ -38,7 +39,7 @@ router.get('/:id', validateActionId, (req, res, next) => {
     });
 });
 
-router.post('/', validateAction, (req, res, next) => {
+router.post('/', validateActionPost, (req, res, next) => {
   const { project_id, description, notes, completed } = req.body;
   Actions.insert({ project_id, description, notes, completed})
     .then(action => {
@@ -48,10 +49,10 @@ router.post('/', validateAction, (req, res, next) => {
       res.status(500).json({
 	message: err.message
       });
-    })
+    });
 });
 
-router.put('/:id', validateActionId, validateAction, (req, res, next) => {
+router.put('/:id', validateActionId, validateActionPut, (req, res, next) => {
   const { project_id, description, notes, completed } = req.body;
   Actions.update(req.params.id, { project_id, description, notes, completed})
     .then(action => {
