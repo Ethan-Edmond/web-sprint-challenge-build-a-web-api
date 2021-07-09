@@ -6,7 +6,7 @@ function actionLogger(req, res, next) {
   console.log('----- Action Logger -----');
   console.log('Req Method: ', req.method);
   console.log('Req URL: ', req.protocol + '://' + req.get('host') + req.originalUrl);
-  console.log("TimeStamp: ", Date());
+  console.log('TimeStamp: ', Date());
   console.log('-------------------------');
   next();
 }
@@ -30,8 +30,29 @@ function validateActionId(req, res, next) {
 }
 
 function validateAction(req, res, next) {
+  const { project_id, description, notes } = req.body;
+  const completed = req.body.completed || false;
   console.log('Validate Action');
-  next();
+  console.log(project_id, description, notes, completed);
+
+  if (project_id.toString() && description && notes) { // existence check
+    if (
+      (typeof project_id === 'number') &&
+      (typeof description === 'string') &&
+      (typeof notes === 'string') &&
+      (typeof completed === 'boolean')
+    ){ // type check
+      next();
+    } else {
+      res.status(400).json({
+        message: 'One of the sections of body has the wrong type'
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: 'Please provide project id, description and notes'
+    });
+  }
 }
 
 module.exports = {
