@@ -30,8 +30,26 @@ function validateProjectId(req, res, next) {
 }
 
 function validateProject(req, res, next) {
-  console.log("Validate Project");
-  next();
+  const { name, description } = req.body;
+  const completed = req.body.completed || false;
+  req.body.completed = completed;
+  if (name && description) { // existence check
+    if (
+      (typeof name === 'string') &&
+      (typeof description === 'string') &&
+      (typeof completed === 'boolean')
+    ) { // type check
+      next();
+    } else {
+      res.status(400).json({
+        message: 'One of the sections of body has the wrong type'
+      });
+    }
+  } else {
+    res.status(400).json({
+      message: 'Please provide name and description'
+    });
+  }
 }
 
 module.exports = {
