@@ -1,5 +1,6 @@
 // add middlewares here related to actions
 const Actions = require('./actions-model');
+const Projects = require('../projects/projects-model');
 
 // get, insert, update, remove
 function actionLogger(req, res, next) {
@@ -44,7 +45,21 @@ function validateAction(req, res, next) {
       (typeof completed === 'boolean')
     ){ // type check
       if (description.length <= 128) { // size check
-	next();
+        Projects.get(project_id)
+          .then(project => {
+	    if(project) {
+	      next();
+	    } else {
+	      res.status(404).json({
+		message: 'Project with the specified id does not exist'
+	      });
+	    }
+	  })
+          .catch(err => {
+            res.status(500).json({
+              message: err.message
+	    });
+	  });
       } else {
         res.status(400).json({
 	  message: 'Description is size limited to 128 characters'
