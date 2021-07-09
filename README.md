@@ -157,7 +157,68 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+  Node's Features include not needing a browser, asynchronous operations, a
+  single thread, the npm package manager and some builtins. The big one here is
+  getting off the browser, but having a dedicated package manager is very nice
+  for installing project dependencies. Express' features include routers, the
+  way that servers and routers handle middleware, and the helper functions on
+  req and res. The routers are a nice way to break up the server definition, the
+  way middleware is handled is great for making using middleware simple (only
+  thing better would be . chaining), and the helper functions on req and res
+  allow one access to a whole bunch of information and functionality (ex.
+  req.body, res.status, req.params, req.query).
+
 1. Understand and explain the use of Middleware.
+
+  I'm actually kind of confused on this one, cause I thought it was the
+  execution order that middleware is in the middle of (like between two other
+  functions), but it seems like that is not the case. And some searching the
+  internet says that middleware is in the middle of abstraction, where
+  middleware provides bridges between disparate pieces of code, but that doesn't
+  fit with a lot of the usage I see. So I suppose I understand middleware as yet
+  another synonym for code. I think it's fair to say that middleware can't be on
+  it's own though.
+
+  You use middleware in express with the .use method on routers or servers. like
+  this:
+```js
+  const middleware = (req, res, next) => {
+    //do stuff
+    next();
+  };
+  
+  server.use(middleware);
+  router.use(middleware);
+```
+
+  Some more internet searching shows that this (req, res, next) thing is also
+  used in redux middleware. I think we already learned that, I'm just realizing it now.
+  
 1. The basic principles of the REST architectural style.
+
+  Each resource gets it's own url.
+  Each resource has each (or as many that you want) of the crud operations.
+  communication is stateless.
+
+  I think the others were kind of 'things are what you make them' rephrased.
+
 1. Understand and explain the use of Express Routers.
+
+  Express routers are used to break up the paths of the server into their own
+  sections. have some endpoints for thing1 and some endpoints for thing2. try:
+  ```js
+  server.use('/thing1', thing1router);
+  server.use('/thing2', thing2router);
+  ```
+  then moving those endpoints to those router files. the routers can use their
+  own middleware and can be treated sort of like mini servers, but they don't
+  need a router.listen or a port or whatever. It's cleaner than making a massive
+  server file.
+  
 1. Describe tooling used to manually test the correctness of an API.
+
+  You can manually test an api with postman, httpie, curl, the browser (just for
+  get requests though) and probably a whole lot of others. Pretty much you just
+  want something to send requests to the api and read the responses without
+  having to make a whole site to do it.
