@@ -65,10 +65,15 @@ router.put('/:id', validateActionId, validateAction, (req, res, next) => {
 });
 
 router.delete('/:id', validateActionId, (req, res, next) => {
-  res.status(200).json({
-	  message: 'delete on /api/actions/:id'
-  });
-
+  Actions.remove(req.params.id)
+    .then(deletedNum => {
+      res.status(200).send();
+    })
+    .catch(err => {
+      res.status(500).json({
+	message: err.message
+      });
+    });
 });
 
 module.exports = router;
