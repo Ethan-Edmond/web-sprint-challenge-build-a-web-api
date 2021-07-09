@@ -37,9 +37,16 @@ router.get('/:id', validateProjectId, (req, res, next) => {
 });
 
 router.post('/', validateProject, (req, res, next) => {
-  res.status(200).json({
-    message: 'post on /api/projects/'
-  });
+  const { name, description, completed } = req.body;
+  Projects.insert({ name, description, completed })
+    .then(project => {
+      res.status(201).json(project);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    });
 });
 
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
