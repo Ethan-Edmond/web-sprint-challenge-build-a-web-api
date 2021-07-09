@@ -3,37 +3,45 @@ const express = require('express');
 
 const router = express.Router();
 
+const {
+  projectLogger,
+  validateProjectId,
+  validateProject
+} = require('./projects-middleware');
+
+router.use(projectLogger);
+
 router.get('/', (req, res, next) => {
   res.status(200).json({
     message: 'get on /api/projects/'
   });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', validateProjectId, (req, res, next) => {
   res.status(200).json({
 	  message: 'get on /api/projects/:id'
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', validateProject, (req, res, next) => {
   res.status(200).json({
     message: 'post on /api/projects/'
   });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
   res.status(200).json({
 	  message: 'put on /api/projects/:id'
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', validateProjectId, (req, res, next) => {
   res.status(200).json({
 	  message: 'delete on /api/projects/:id'
   });
 });
 
-router.get('/:id/actions', (req, res, next) => {
+router.get('/:id/actions', validateProjectId, (req, res, next) => {
   res.status(200).json({
 	  message: 'get on /api/projects/:id/actions'
   });
