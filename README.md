@@ -190,6 +190,7 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
   
   server.use(middleware);
   router.use(middleware);
+  router2.use(middleware1, middleware2, middleware3);
 ```
 
   Some more internet searching shows that this (req, res, next) thing is also
