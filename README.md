@@ -18,17 +18,17 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 
 ### Task 1: Project Set Up
 
-- [ ] Fork and clone this repository. **If you are repeating this Course, delete your old fork from Github and re-fork and re-clone.**
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created branch, committing changes regularly.
-- [ ] Push commits: `git push origin <firstName-lastName>`.
-- [ ] **RUN** `npm install` to install your dependencies.
+- [x] Fork and clone this repository. **If you are repeating this Course, delete your old fork from Github and re-fork and re-clone.**
+- [x] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [x] Implement the project on your newly created branch, committing changes regularly.
+- [x] Push commits: `git push origin <firstName-lastName>`.
+- [x] **RUN** `npm install` to install your dependencies.
 
 ### Task 2: CodeGrade Setup
 
-- [ ] Follow [instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374) to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>` branch.
-- [ ] Make a commit and push it to Github.
-- [ ] Check to see that Codegrade has accepted your git submission.
+- [x] Follow [instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374) to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>` branch.
+- [x] Make a commit and push it to Github.
+- [x] Check to see that Codegrade has accepted your git submission.
 
 ### Task 3: Project Requirements (MVP)
 
@@ -39,46 +39,46 @@ Your finished project must include all of the following requirements:
 A _"test"_ script already exists you can use to run tests against your code.
 A _"resetdb"_ script exists that allows you to reset the database to its original state.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
-- [ ] Install _nodemon_ as a development dependency that would not be used in production.
+- [x] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [x] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
+- [x] Install _nodemon_ as a development dependency that would not be used in production.
 
 #### Environment Variables
 
-- [ ] Bring the port number from the `process.env` variable, falling back to `5000` if `process.env.PORT` is undefined.
+- [x] Bring the port number from the `process.env` variable, falling back to `5000` if `process.env.PORT` is undefined.
 
 #### Endpoints
 
 Inside `api/projects/projects-router.js` build the following endpoints:
 
-- [ ] `[GET] /api/projects`
+- [x] `[GET] /api/projects`
   - Returns an array of projects as the body of the response.
   - If there are no projects it responds with an empty array.
-- [ ] `[GET] /api/projects/:id`
+- [x] `[GET] /api/projects/:id`
   - Returns a project with the given `id` as the body of the response.
   - If there is no project with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/projects`
+- [x] `[POST] /api/projects`
   - Returns the newly created project as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
 - [ ] `[PUT] /api/projects/:id`
   - Returns the updated project as the body of the response.
   - If there is no project with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[DELETE] /api/projects/:id`
+- [x] `[DELETE] /api/projects/:id`
   - Returns no response body.
   - If there is no project with the given `id` it responds with a status code 404.
-- [ ] `[GET] /api/projects/:id/actions`
+- [x] `[GET] /api/projects/:id/actions`
   - Returns an array of actions (could be empty) belonging to a project with the given `id`.
   - If there is no project with the given `id` it responds with a status code 404.
 
 Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
 
-- [ ] `[GET] /api/actions`
+- [x] `[GET] /api/actions`
   - Returns an array of actions (or an empty array) as the body of the response.
-- [ ] `[GET] /api/actions/:id`
+- [x] `[GET] /api/actions/:id`
   - Returns an action with the given `id` as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/actions`
+- [x] `[POST] /api/actions`
   - Returns the newly created action as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
   - When adding an action make sure the `project_id` provided belongs to an existing `project`.
@@ -86,13 +86,13 @@ Inside `api/actions/actions-router.js` build endpoints for performing CRUD opera
   - Returns the updated action as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[DELETE] /api/actions/:id`
+- [x] `[DELETE] /api/actions/:id`
   - Returns no response body.
   - If there is no action with the given `id` it responds with a status code 404.
 
 #### Middleware functions
 
-- [ ] Write at least two middleware functions for this API, and consume them in the proper places of your code.
+- [x] Write at least two middleware functions for this API, and consume them in the proper places of your code.
 
 ### Database Schemas
 
@@ -146,8 +146,8 @@ We have provided test data for all the resources.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
-- [ ] Create a pull-request to merge `<firstName-lastName>` branch into main.
+- [x] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
+- [x] Create a pull-request to merge `<firstName-lastName>` branch into main.
 - [ ] Check Codegrade for automated feedback.
 - [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
@@ -157,7 +157,69 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+  Node's Features include not needing a browser, asynchronous operations, a
+  single thread, the npm package manager and some builtins. The big one here is
+  getting off the browser, but having a dedicated package manager is very nice
+  for installing project dependencies. Express' features include routers, the
+  way that servers and routers handle middleware, and the helper functions on
+  req and res. The routers are a nice way to break up the server definition, the
+  way middleware is handled is great for making using middleware simple (only
+  thing better would be . chaining), and the helper functions on req and res
+  allow one access to a whole bunch of information and functionality (ex.
+  req.body, res.status, req.params, req.query).
+
 1. Understand and explain the use of Middleware.
+
+  I'm actually kind of confused on this one, cause I thought it was the
+  execution order that middleware is in the middle of (like between two other
+  functions), but it seems like that is not the case. And some searching the
+  internet says that middleware is in the middle of abstraction, where
+  middleware provides bridges between disparate pieces of code, but that doesn't
+  fit with a lot of the usage I see. So I suppose I understand middleware as yet
+  another synonym for code. I think it's fair to say that middleware can't be on
+  it's own though.
+
+  You use middleware in express with the .use method on routers or servers. like
+  this:
+```js
+  const middleware = (req, res, next) => {
+    //do stuff
+    next();
+  };
+  
+  server.use(middleware);
+  router.use(middleware);
+  router2.use(middleware1, middleware2, middleware3);
+```
+
+  Some more internet searching shows that this (req, res, next) thing is also
+  used in redux middleware. I think we already learned that, I'm just realizing it now.
+  
 1. The basic principles of the REST architectural style.
+
+  Each resource gets it's own url.
+  Each resource has each (or as many that you want) of the crud operations.
+  communication is stateless.
+
+  I think the others were kind of 'things are what you make them' rephrased.
+
 1. Understand and explain the use of Express Routers.
+
+  Express routers are used to break up the paths of the server into their own
+  sections. have some endpoints for thing1 and some endpoints for thing2. try:
+  ```js
+  server.use('/thing1', thing1router);
+  server.use('/thing2', thing2router);
+  ```
+  then moving those endpoints to those router files. the routers can use their
+  own middleware and can be treated sort of like mini servers, but they don't
+  need a router.listen or a port or whatever. It's cleaner than making a massive
+  server file.
+  
 1. Describe tooling used to manually test the correctness of an API.
+
+  You can manually test an api with postman, httpie, curl, the browser (just for
+  get requests though) and probably a whole lot of others. Pretty much you just
+  want something to send requests to the api and read the responses without
+  having to make a whole site to do it.
